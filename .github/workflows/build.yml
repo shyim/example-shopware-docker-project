@@ -10,24 +10,62 @@ permissions:
   packages: write
 
 jobs:
-  build:
+  # build:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout Repository
+  #       uses: actions/checkout@v3
+
+  #     - name: Set up Docker Buildx
+  #       uses: docker/setup-buildx-action@v2
+        
+  #     - name: Login into Github Docker Registery
+  #       run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+  #     - name: Build and push
+  #       uses: docker/build-push-action@v4
+  #       with:
+  #         context: .
+  #         file: ./docker/Dockerfile
+  #         push: true
+  #         cache-from: type=gha
+  #         cache-to: type=gha,mode=max
+  #         tags: ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}:latest
+
+  deploy:
+    # needs: build
     runs-on: ubuntu-latest
+    environment:
+      name: production
+    env:
+      SERVER_IP: '128.140.34.138'
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-        
       - name: Login into Github Docker Registery
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
-      - name: Build and push
-        uses: docker/build-push-action@v4
+      - name: Setup SSH Key
+        uses: webfactory/ssh-agent@v0.8.0
         with:
-          context: .
-          file: ./docker/Dockerfile
-          push: true
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
-          tags: ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}:latest
+            ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Scan Host
+        run: ssh-keyscan "$SERVER_IP" >> ~/.ssh/known_hosts
+
+      - name: Add to Docker
+        run: |
+          docker context create server --docker "host=ssh://root@$SERVER_IP"
+          docker context use server
+
+      - name: Pull Image
+        run: docker pull ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}:latest
+
+      - name: Start Services
+        run: docker compose -f docker-compose.prod.yml
+        env:
+          APP_SECRET: ${{ secrets.APP_SECRET }}
+          INSTANCE_ID: ${{ secrets.INSTANCE_ID }}
+          JWT_PRIVATE_KEY: ${{ secrets.JWT_PRIVATE_KEY }}
+          JWT_PUBLIC_KEY: ${{ secrets.JWT_PUBLIC_KEY }}
