@@ -32,5 +32,4 @@ custom/*
 !/var/log/.gitkeep
 !/var/cache/.gitkeep
 /auth.json
-/install.lock
 ###< shopware/core ###
