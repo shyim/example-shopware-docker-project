@@ -72,3 +72,7 @@ jobs:
           JWT_PRIVATE_KEY: ${{ secrets.JWT_PRIVATE_KEY }}
           JWT_PUBLIC_KEY: ${{ secrets.JWT_PUBLIC_KEY }}
           MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
+
+      - name: Show Logs
+        if: always()
+        run: docker logs shopware-init-1
