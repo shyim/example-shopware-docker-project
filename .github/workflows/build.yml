@@ -63,7 +63,7 @@ jobs:
         run: docker pull ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}:latest
 
       - name: Start Services
-        run: docker compose -f docker-compose.prod.yml
+        run: docker compose -f docker-compose.prod.yml up -d
         env:
           APP_SECRET: ${{ secrets.APP_SECRET }}
           INSTANCE_ID: ${{ secrets.INSTANCE_ID }}
