@@ -23,6 +23,7 @@ services:
             MYSQL_USER: shopware
             MYSQL_PASSWORD: '${MYSQL_PASSWORD}'
             MYSQL_DATABASE: shopware
+            MYSQL_RANDOM_ROOT_PASSWORD: 1
         volumes:
           - mysql-data:/var/lib/mysql
 
