@@ -71,4 +71,4 @@ jobs:
           INSTANCE_ID: ${{ secrets.INSTANCE_ID }}
           JWT_PRIVATE_KEY: ${{ secrets.JWT_PRIVATE_KEY }}
           JWT_PUBLIC_KEY: ${{ secrets.JWT_PUBLIC_KEY }}
-          MYSQL_PASSWORD: ${{ secrets.JWT_PUBLIC_KEY }}
+          MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
