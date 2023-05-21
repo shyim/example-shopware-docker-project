@@ -13,7 +13,7 @@ x-app: &app
     JWT_PUBLIC_KEY: '${JWT_PUBLIC_KEY}'
     APP_URL: http://localhost
     DATABASE_HOST: db
-    DATABASE_URL: mysql://shopware:${MYSQL_PASSWORD}@db/shopware
+    DATABASE_URL: mysql://shopware:${MYSQL_PASSWORD_ESCAPED}@db/shopware
 
 version: "3.8"
 services:
