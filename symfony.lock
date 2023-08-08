@@ -14,11 +14,11 @@
             "repo": "github.com/shopware/recipes",
             "branch": "main",
             "version": "0.1",
-            "ref": "9c1b29f4e3f33f4ca2da2529771c849d2bb326d8"
+            "ref": "306fcd6d602399cfc1a97e6886055d0269237eae"
         },
         "files": [
-            "docker/Dockerfile",
-            "config/packages/prod/production_docker.yaml"
+            "config/packages/prod/production_docker.yaml",
+            "docker/Dockerfile"
         ]
     },
     "nyholm/psr7": {
@@ -39,7 +39,7 @@
             "repo": "github.com/shopware/recipes",
             "branch": "main",
             "version": "6.4",
-            "ref": "bc67d148caf3affed5b5a023fee86784baea9140"
+            "ref": "55ec4f22e5275c67f7c61c689607fa37ba6d8acf"
         },
         "files": [
             "bin/build-administration.sh",
@@ -52,7 +52,7 @@
             "repo": "github.com/shopware/recipes",
             "branch": "main",
             "version": "6.4",
-            "ref": "fd9dc634ce9d5afb29d97701713402e21ca20cba"
+            "ref": "d1a3b69bd3411f4724d213c6f7c4c54884b22793"
         },
         "files": [
             "bin/.htaccess",
@@ -70,8 +70,8 @@
             "public/.htaccess.dist",
             "public/index.php",
             "public/maintenance.html",
-            "var/.htaccess",
-            ".htaccess"
+            "root/.htaccess",
+            "var/.htaccess"
         ]
     },
     "shopware/elasticsearch": {
@@ -80,7 +80,7 @@
             "repo": "github.com/shopware/recipes",
             "branch": "main",
             "version": "6.4",
-            "ref": "fb8938afd48972f686f0a4d38ba0df5bcc813a6e"
+            "ref": "f68a89cacedf3e2132444874e1e1e3c4864dae6d"
         },
         "files": [
             "config/packages/elasticsearch.yaml"
@@ -133,12 +133,12 @@
         ]
     },
     "symfony/framework-bundle": {
-        "version": "6.2",
+        "version": "6.3",
         "recipe": {
             "repo": "github.com/shopware/recipes",
             "branch": "main",
             "version": "5.4",
-            "ref": "b6540f293d416943ca515aaad3c28e458bad2836"
+            "ref": "bb1cc9e0b12d1b8c2ca2b1a8ae48c9917e338289"
         },
         "files": [
             "config/services.yaml"
