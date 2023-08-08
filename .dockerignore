@@ -2,3 +2,5 @@
 docker
 public/bundles
 vendor
+files/asset-manifest.json
+public/asset-manifest.json

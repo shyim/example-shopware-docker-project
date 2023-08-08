@@ -8,7 +8,7 @@ FROM ghcr.io/friendsofshopware/shopware-cli:0.2.4-php-8.2 as shopware-cli
 
 FROM shopware-cli as build
 
-ADD . /src
+COPY --link . /src
 WORKDIR /src
 
 RUN --mount=type=secret,id=composer_auth,dst=/src/auth.json \
