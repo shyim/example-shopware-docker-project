@@ -33,50 +33,50 @@ jobs:
           cache-to: type=gha,mode=max
           tags: ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}:latest
 
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: production
-    env:
-      SERVER_IP: '128.140.34.138'
-      COMPOSE_PROJECT_NAME: shopware
-      COMPOSE_FILE: docker-compose.prod.yml
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3
+  # deploy:
+  #   needs: build
+  #   runs-on: ubuntu-latest
+  #   environment:
+  #     name: production
+  #   env:
+  #     SERVER_IP: '128.140.34.138'
+  #     COMPOSE_PROJECT_NAME: shopware
+  #     COMPOSE_FILE: docker-compose.prod.yml
+  #   steps:
+  #     - name: Checkout Repository
+  #       uses: actions/checkout@v3
 
-      - name: Login into Github Docker Registery
-        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+  #     - name: Login into Github Docker Registery
+  #       run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
-      - name: Setup SSH Key
-        uses: webfactory/ssh-agent@v0.8.0
-        with:
-            ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+  #     - name: Setup SSH Key
+  #       uses: webfactory/ssh-agent@v0.8.0
+  #       with:
+  #           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-      - name: Scan Host
-        run: ssh-keyscan "$SERVER_IP" >> ~/.ssh/known_hosts
+  #     - name: Scan Host
+  #       run: ssh-keyscan "$SERVER_IP" >> ~/.ssh/known_hosts
 
-      - name: Add to Docker
-        run: |
-          docker context create server --docker "host=ssh://root@$SERVER_IP"
-          docker context use server
+  #     - name: Add to Docker
+  #       run: |
+  #         docker context create server --docker "host=ssh://root@$SERVER_IP"
+  #         docker context use server
 
-      - name: Pull Image
-        run: docker pull ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}:latest
+  #     - name: Pull Image
+  #       run: docker pull ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}:latest
 
-      - name: Start Services
-        run: |
-          export MYSQL_PASSWORD_ESCAPED=$(php -r 'echo rawurlencode($_SERVER["MYSQL_PASSWORD"]);')
-          docker compose up -d init
-          docker compose up -d
-        env:
-          APP_SECRET: ${{ secrets.APP_SECRET }}
-          INSTANCE_ID: ${{ secrets.INSTANCE_ID }}
-          JWT_PRIVATE_KEY: ${{ secrets.JWT_PRIVATE_KEY }}
-          JWT_PUBLIC_KEY: ${{ secrets.JWT_PUBLIC_KEY }}
-          MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
+  #     - name: Start Services
+  #       run: |
+  #         export MYSQL_PASSWORD_ESCAPED=$(php -r 'echo rawurlencode($_SERVER["MYSQL_PASSWORD"]);')
+  #         docker compose up -d init
+  #         docker compose up -d
+  #       env:
+  #         APP_SECRET: ${{ secrets.APP_SECRET }}
+  #         INSTANCE_ID: ${{ secrets.INSTANCE_ID }}
+  #         JWT_PRIVATE_KEY: ${{ secrets.JWT_PRIVATE_KEY }}
+  #         JWT_PUBLIC_KEY: ${{ secrets.JWT_PUBLIC_KEY }}
+  #         MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
 
-      - name: Show Logs
-        if: always()
-        run: docker logs shopware-init-1
+  #     - name: Show Logs
+  #       if: always()
+  #       run: docker logs shopware-init-1
