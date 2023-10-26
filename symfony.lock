@@ -8,19 +8,6 @@
             "ref": "d7afb8d11ee0e18f644cc77c2df9b372e89cb3a9"
         }
     },
-    "frosh/production-docker": {
-        "version": "0.1",
-        "recipe": {
-            "repo": "github.com/shopware/recipes",
-            "branch": "main",
-            "version": "0.1",
-            "ref": "306fcd6d602399cfc1a97e6886055d0269237eae"
-        },
-        "files": [
-            "config/packages/prod/production_docker.yaml",
-            "docker/Dockerfile"
-        ]
-    },
     "nyholm/psr7": {
         "version": "1.6",
         "recipe": {
@@ -72,6 +59,19 @@
             "public/maintenance.html",
             "root/.htaccess",
             "var/.htaccess"
+        ]
+    },
+    "shopware/docker": {
+        "version": "0.1",
+        "recipe": {
+            "repo": "github.com/shopware/recipes",
+            "branch": "main",
+            "version": "0.1",
+            "ref": "b3370069badac61adf860447c8728481e2636a18"
+        },
+        "files": [
+            "docker/Dockerfile",
+            "config/packages/prod/production_docker.yaml"
         ]
     },
     "shopware/elasticsearch": {
