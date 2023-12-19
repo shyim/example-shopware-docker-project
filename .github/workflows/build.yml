@@ -29,8 +29,8 @@ jobs:
           context: .
           file: ./docker/Dockerfile
           push: true
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          #cache-from: type=gha
+          #cache-to: type=gha,mode=max
           tags: ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}:latest
 
   # deploy:
