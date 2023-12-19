@@ -23,14 +23,36 @@ jobs:
       - name: Login into Github Docker Registery
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
+      - name: Cache /root/.composer
+        uses: actions/cache@v3
+        with:
+          path: composer-cache
+          key: composer-cache-${{ hashFiles('composer.lock') }}
+
+      - name: Inject Composer Cache
+        uses: reproducible-containers/buildkit-cache-dance@v2.1.3
+        with:
+          cache-source: composer-cache
+          cache-target: /root/.composer
+
+      - name: Cache /root/.bun
+        uses: actions/cache@v3
+        with:
+          path: bun-cache
+          key: bun-cache-${{ hashFiles('composer.lock') }}
+  
+      - name: Inject Composer Cache
+        uses: reproducible-containers/buildkit-cache-dance@v2.1.3
+        with:
+          cache-source: bun-cache
+          cache-target: /root/.bun
+
       - name: Build and push
         uses: docker/build-push-action@v4
         with:
           context: .
           file: ./docker/Dockerfile
           push: true
-          #cache-from: type=gha
-          #cache-to: type=gha,mode=max
           tags: ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}:latest
 
   # deploy:
