@@ -13,6 +13,8 @@ permissions:
 jobs:
   build:
     uses: shopware/github-actions/.github/workflows/build-docker-image.yml@main
+    with:
+      disable-bun: true
     secrets:
       ghToken: ${{ secrets.GITHUB_TOKEN }}
 
