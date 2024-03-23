@@ -1,5 +1,4 @@
 .github
 docker
-public/bundles
 files/asset-manifest.json
 public/asset-manifest.json

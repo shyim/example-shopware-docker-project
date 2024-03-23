@@ -12,7 +12,6 @@ x-app: &app
     JWT_PRIVATE_KEY: '${JWT_PRIVATE_KEY}'
     JWT_PUBLIC_KEY: '${JWT_PUBLIC_KEY}'
     APP_URL: http://localhost:8000
-    DATABASE_HOST: db
     DATABASE_URL: mysql://shopware:${MYSQL_PASSWORD_ESCAPED}@db/shopware
 
 version: "3.8"
@@ -51,7 +50,7 @@ services:
             init:
                 condition: service_completed_successfully
         ports:
-            - 8000:8000
+            - 80:8000
 
     worker:
         <<: *app
