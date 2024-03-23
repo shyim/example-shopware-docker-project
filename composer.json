@@ -3,9 +3,10 @@
     "type": "project",
     "require": {
         "composer-runtime-api": "^2.0",
-        "shopware/docker": "^0.1.0",
+        "frosh/tools": "^2.1",
         "shopware/administration": "*",
         "shopware/core": "~v6.6.0",
+        "shopware/docker": "^0.1.0",
         "shopware/elasticsearch": "*",
         "shopware/storefront": "*",
         "symfony/flex": "~2",

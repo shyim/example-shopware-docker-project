@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1774e2c6e096b19e8dd795f238a0ece9",
+    "content-hash": "dfa5651cda26f297b0f9dcc5d5b579d6",
     "packages": [
         {
             "name": "brick/math",
@@ -1786,6 +1786,65 @@
                 }
             ],
             "time": "2024-03-20T12:50:41+00:00"
+        },
+        {
+            "name": "frosh/tools",
+            "version": "2.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FriendsOfShopware/FroshTools.git",
+                "reference": "d31f5639cd774761f2fce768583e21b55e3bf952"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/FriendsOfShopware/FroshTools/zipball/d31f5639cd774761f2fce768583e21b55e3bf952",
+                "reference": "d31f5639cd774761f2fce768583e21b55e3bf952",
+                "shasum": ""
+            },
+            "require": {
+                "shopware/core": "~6.6.0"
+            },
+            "type": "shopware-platform-plugin",
+            "extra": {
+                "shopware-plugin-class": "Frosh\\Tools\\FroshTools",
+                "label": {
+                    "de-DE": "Tools",
+                    "en-GB": "Tools"
+                },
+                "description": {
+                    "de-DE": "Die kostenlose Shopware 6 App beinhaltet mehrere Werkzeuge um den Shop besser zu verwalten. Optimierter Cache Manager, Log Viewer um die Logeinträge zu sehen oder Tasks auszuführen.",
+                    "en-GB": "The free Shopware 6 app include several tools to manage the store much better like a cache manager, log viewer to see the log entries, run the tasks or see the system status."
+                },
+                "manufacturerLink": {
+                    "de-DE": "https://github.com/FriendsOfShopware/FroshTools",
+                    "en-GB": "https://github.com/FriendsOfShopware/FroshTools"
+                },
+                "supportLink": {
+                    "de-DE": "https://github.com/FriendsOfShopware/FroshTools/issues",
+                    "en-GB": "https://github.com/FriendsOfShopware/FroshTools/issues"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Frosh\\Tools\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "FriendsOfShopware",
+                    "homepage": "https://friendsofshopware.com"
+                }
+            ],
+            "description": "Provides some basic things for managing the Shopware Installation",
+            "support": {
+                "issues": "https://github.com/FriendsOfShopware/FroshTools/issues",
+                "source": "https://github.com/FriendsOfShopware/FroshTools/tree/2.1.2"
+            },
+            "time": "2024-02-09T23:22:50+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
